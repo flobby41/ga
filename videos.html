@@ -20,59 +20,90 @@
   position: relative;
 
     }
-
-
-    button{
-border: none;
-background-color: white;
+    .topnav {
+  position: fixed;
+  display: flex;
+  bottom: 0; left: 0; right: 0; max-width: 100%; max-height: 40px;
+  background-color: white;
+  border: none;
 font-family: "Roboto Condensed", sans-serif;
 color: gray;
     font-size: 23px;
       transition: opacity 0.5s;
-      
-
-
-    }
-
-    button:hover{
-      opacity: 0.8;
+      flex-direction: row; 
+      justify-content: space-between;
+       align-items: center;
 
     }
 
 
-    a.musique-link:link, a.musique-link:visited,
-    a.videos-link:link, a.videos-link:visited, 
-    a.merch-link:link, a.merch-link:visited,
-    a.contact-link:link, a.contact-link:visited{
-      text-decoration: none;
-      color: gray;
 
-    }
+.topnav a {
+  display: block;
+  color: gray;
+  padding: 12px 14px;
+  text-decoration: none;
+  font-size: 23px;
+}
 
+.topnav a:hover {
+  color: black;
+}
 
+.topnav a.active {
+  color: gray;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child) {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
 </style>
+</head>
+<body>
 
-  </head>
-
-
-  <body> 
-
-     
-    <div style="background-color: white; position: fixed; bottom: 0; left: 0; right: 0; width: 100%; height: 40px;display: flex;flex-direction: row; justify-content: space-between; align-items: center;">
-    
-
-
-      <div>  <button> À PROPOS </button></div>
-      <div > <button> <a class="musique-link" href="musique.html">MUSIQUE</a> </button></div>
-      <div > <button> <a class="videos-link" href="videos.html" > VIDEOS</a> </button></div>
-      <div> <button> <a class="merch-link" href="/AddToCard/merch.html">MERCHANDISING</a> </button> </div>
-      <div> <button> <a class="contact-link" href="contact.html"> CONTACT</a>  </button> </div>
-      
-    
-    
-    </div>
+<div class="topnav" id="myTopnav">
+  <a href="#home" >MAIN</a>
+  <a href="#news">VIDEOS</a>
+  <a href="#contact">MERCHANDISING</a>
+  <a href="#about">CONTACT</a>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
 
 
-  </body>
+<script>
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
 
+</body>
 </html>
