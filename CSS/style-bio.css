@@ -1,0 +1,144 @@
+/* CODE SOURCE ===> https://www.codingnepalweb.com/navigation-bar-html-css-javascript/*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* la c est la bar navigation page principale*/
+.nav {
+  position: fixed;
+  top: 0;
+  font-size: large;
+  left: 0;
+  width: 100%;
+  padding: 10px 200px;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.nav,
+.nav .nav-links {
+  display: flex;
+  align-items: center;
+}
+.home:hover, .videos:hover, .merch:hover, .contact:hover, .music:hover{
+color: rgb(113, 158,206);}
+.nav {
+  justify-content: space-between;
+}
+a {
+  color: gray;
+  text-decoration: none;
+}
+
+.nav .nav-links {
+  column-gap: 20px;
+  list-style: none;
+
+
+
+}
+.nav .nav-links a {
+  transition: all 0.2s linear;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+.nav.openSearch .nav-links a {
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+
+
+
+.nav .navOpenBtn,
+.nav .navCloseBtn {
+  display: none;
+
+}
+
+/* responsive : c'est ca l ecran menu animé noir*/
+@media screen and (max-width: 1160px) {
+  .nav {
+    padding: 0px 0px;
+    z-index: 20;
+
+  }
+  
+}
+@media screen and (max-width: 950px) {
+  .nav {
+    padding: 0 0px;
+ z-index: 20;
+  }
+ 
+}
+
+
+/*  : c'est ca le logo Ga*/
+
+@media screen and (max-width: 768px) {
+  .nav .navOpenBtn,
+  .nav .navCloseBtn {
+    display: block;
+    z-index: 20;
+  }
+
+  /* ca c est le logo + videos */
+  .nav {
+    padding: 5px 20px;
+  }
+
+  /*   ca c encore l ecran menu animé noir
+  nav-links = lien du navigateur noir*/
+
+  .nav .nav-links {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    z-index: 2;
+    height: 100%;
+    max-width: 280px;
+    width: 100%;
+    padding-top: 100px;
+    row-gap: 30px;
+    flex-direction: column;
+    background-color: #11101d;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    z-index: 100;
+  }
+  .nav.openNav .nav-links {
+    left: 0;
+  }
+  /* ca c est le ptit logo burger pour ouvrir le menu noir!! */
+  .nav .navOpenBtn {
+    color: red;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  /* ca c est la croix de fermeture */
+   .nav .navCloseBtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 100;
+  } 
+ 
+}
+/* ca cest le mot videos */
+div{ 
+font-family: Arial, Helvetica, sans-serif;
+font-size: 14px;
+font-style: italic;
+text-align: center;
+
+}
+
