@@ -26,45 +26,45 @@
   },
   {
       "id": 5,
-      "name": "White GA T-shirt",
+      "name": "Key Ring",
       "price": 26,
-      "image": "/image-merch/5.jpg"
+      "image": "/image-merch/5.jpeg"
   },
   {
       "id": 6,
-      "name": "Key Ring",
+      "name": "White GA T-shirt",
       "price": 7,
-      "image": "/image-merch/6.jpeg"
+      "image": "/image-merch/6.jpg"
   }, 
   {
     "id": 7,
-    "name": "White GA T-shirt",
+    "name": "White GA T-shirt Logo",
     "price": 7,
-    "image": "/image-merch/8.jpg"
+    "image": "/image-merch/7.jpg"
 }, 
 {
     "id": 8,
-    "name": "White GA T-shirt",
+    "name": "White GA T-shirt Repeat",
     "price": 7,
-    "image": "/image-merch/9.jpg"
-}, 
+    "image": "/image-merch/8.jpg"
+},      
 {
     "id": 9,
     "name": "Enfants du Paradis EP",
     "price": 7,
-    "image": "/image-merch/10.jpg"
+    "image": "/image-merch/9.jpg"
 },
 {
     "id": 10,
     "name": "Rock'N'Roll EP",
     "price": 7,
-    "image": "/image-merch/11.jpg"
+    "image": "/image-merch/10.jpg"
 },
  {
     "id": 11,
     "name": "Urban Machine EP",
     "price": 7,
-    "image": "/image-merch/13.jpg"
+    "image": "/image-merch/11.jpg"
 }, 
 {
     "id": 12,
