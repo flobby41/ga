@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html> 
+  
+  
+  <head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+  <meta charset="utf-8">
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+
+  <meta charset="UTF-8">
+  
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+
+  <title>Cube Animation</title>
+
+  <link rel="stylesheet" media="screen" href="/css/Cube-anim.css" />
+  
+<style>
+
+#svg-wrapper {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 53px;
+  height: auto;
+}
+#svg-wrapper svg {
+  position: relative;
+  padding: 0px !important;
+  stroke: none;
+}
+#svg-wrapper:hover {
+  width: 56px;
+  transition: width 0.1s;
+  -webkit-transition: width 0.1s;
+  /* Safari */
+}
+
+.toggle-animation {
+  width: 100px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border: solid 1px;
+  font-family: helvetica;
+}
+
+body {
+  background: #3C475D;
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  padding: 3px;
+}
+
+line {
+  stroke-miterlimit: 10;
+  stroke-width: 4px;
+  stroke: #EEC218;
+}
+
+#cube {
+  animation: opacity 5s infinite;
+  transform-origin: 50% 50%;
+}
+
+.cls-1 {
+  animation: draw1 5s infinite normal;
+  stroke-dasharray: 106px;
+  stroke-dashoffset: 106px;
+}
+
+.cls-2 {
+  animation: draw2 5s infinite normal;
+  stroke-dasharray: 106px;
+  stroke-dashoffset: 106px;
+}
+
+.cls-3 {
+  animation: draw3 5s infinite normal;
+  stroke-dasharray: 106px;
+  stroke-dashoffset: 106px;
+}
+
+.cls-4 {
+  animation: draw4 5s infinite normal;
+  stroke-dasharray: 106px;
+  stroke-dashoffset: 106px;
+}
+
+@keyframes draw1 {
+  0% {
+    stroke-dashoffset: 106px;
+  }
+  15%, 100% {
+    stroke-dashoffset: 0px;
+  }
+}
+@keyframes draw2 {
+  15% {
+    stroke-dashoffset: 106px;
+  }
+  30%, 100% {
+    stroke-dashoffset: 0px;
+  }
+}
+@keyframes draw3 {
+  30% {
+    stroke-dashoffset: 106px;
+  }
+  45%, 100% {
+    stroke-dashoffset: 0px;
+  }
+}
+@keyframes draw4 {
+  45% {
+    stroke-dashoffset: 106px;
+  }
+  60%, 100% {
+    stroke-dashoffset: 0px;
+  }
+}
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  10%, 60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+</style>
+
+  
+  
+  
+</head>
+
+<body translate="no">
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185 214" height="300px">
+  <g id="cube a">
+  <g id="g1 a" data-name="Layer 2">
+      <line class="cls-1 a" x1="92.51" y1="106" x2="92.51" y2="0"/>
+      <line class="cls-1 a" x1="92.51" y1="106" x2="184.01" y2="159.51"/>
+      <line class="cls-1 a" x1="92.51" y1="106" x2="1.01" y2="159.51"/>
+  </g>
+  <g id="g2" data-name="Layer 2">
+      <line class="cls-2 a" x1="184.01" y1="159.51" x2="184.01" y2="53.51"/>
+      <line class="cls-2 a" x1="1.01" y1="159.51" x2="1.01" y2="53.51"/>
+  </g>
+    <g id="g3" data-name="Layer 2">
+      <line class="cls-3 a" x1="184.01" y1="159.51" x2="92.511" y2="213"/>
+      <line class="cls-3 a" x1="1.01" y1="159.51" x2="92.51" y2="213"/>
+  </g>
+  <g id="g4" data-name="Layer 2">
+      <line class="cls-4 a" x1="184.01" y1="53.51" x2="92.51" y2="0"/>
+      <line class="cls-4 a" x1="1.01" y1="53.51" x2="92.51" y2="0"/>
+  </g>
+  </g>    
+</svg>
+
+      <script id="rendered-js" >
+var toggle = document.querySelector('.toggle-animation');
+toggle.addEventListener('click', function(){  
+var animated = document.querySelectorAll('.a');
+ for (var i=0; i<animated.length; i++){
+     if ( animated[i].style.animationPlayState === 'paused' ) {
+      animated[i].style.animationPlayState = "running";
+    }
+    else{
+      animated[i].style.animationPlayState = "paused";
+    }
+  }
+}); 
+    </script>
+
+
+
+</body>
+
+</html>
+
+
