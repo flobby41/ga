@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+    
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+
+
+  <title>CodePen - CSS Placeholder Text</title>
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Fira+Mono:500'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,700'>
+  
+<style>
+*:empty::before {
+  content: "Please Add Information";
+  color: gray;
+}
+
+.code {
+  font-family: "Fira Mono";
+  background: #3C475D;
+  color: #F4F4F4;
+  padding: 1em;
+  line-height: 1.5em;
+}
+
+.placeholder-text {
+  width: 80%;
+  height: 70vh;
+}
+.placeholder-text section {
+  margin-top: 1em;
+}
+
+h1 {
+  font-size: 2.5em;
+  font-weight: 700;
+}
+
+h2 {
+  font-weight: 700;
+}
+
+h2,
+p {
+  display: inline-block;
+  font-size: 1.25em;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+html body,
+body body {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  background: #F4F4F4;
+  font-family: "Roboto", sans-serif;
+}
+html .center,
+body .center {
+  align-self: center;
+}
+
+#svg-wrapper {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 53px;
+  height: auto;
+}
+#svg-wrapper svg {
+  position: relative;
+  padding: 0px !important;
+  stroke: none;
+}
+#svg-wrapper:hover {
+  width: 56px;
+  transition: width 0.1s;
+  -webkit-transition: width 0.1s;
+  /* Safari */
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <section class="placeholder-text center">
+  <h1>CSS Placeholder Text</h1>
+  <section class="code">
+    *:empty::before{
+    <br />content: "Please Add Information";
+    <br />}
+  </section>
+  <section>
+    <h2>Education:</h2>
+    <p></p>
+  </section>
+  <section>
+    <h2>Skills:</h2>
+    <p>HTML, CSS, JavaScript</p>
+  </section>
+  <section>
+    <h2>Awards:</h2>
+    <p></p>
+  </section>
+  <section>
+    <h2>Hobbies:</h2>
+    <p></p>
+  </section>
+</section>
+  
+      <script id="rendered-js" >
+
+//# sourceURL=pen.js
+    </script>
+
+  
+</body>
+
+</html>
+
+  

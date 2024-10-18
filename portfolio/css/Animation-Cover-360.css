@@ -1,0 +1,28 @@
+div {
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+    animation-timing-function:linear;
+    backface-visibility: hidden;
+    position: absolute;
+    padding: 30px;
+  }
+  
+  
+  @keyframes face-a {
+    from { transform: perspective(400px)  rotateY(-180deg); }
+    to { transform:  perspective(400px) rotateY(180deg); }
+  }
+  
+  div.face-a {
+    animation-name: face-a;
+  }
+  
+  @keyframes face-b {
+    from { transform: perspective(400px) rotateY(0deg); }
+    to { transform:  perspective(400px) rotateY(360deg); }
+  }
+  
+  div.face-b {
+  transform: rotate(1,2,3,180deg);
+  animation-name: face-b;
+}

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+
+
+  <title>CodePen - Radial Meter</title>
+
+    <link rel="canonical" href="https://codepen.io/katzkode/pen/BpXGzK">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Fira+Mono:500'>
+  
+<style>
+html, body {
+  width: 100%;
+  height: 100%;
+}
+html body, body body {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  background: #F4F4F4;
+}
+html .center, body .center {
+  align-self: center;
+}
+
+#svg-wrapper {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 53px;
+  height: auto;
+}
+#svg-wrapper svg {
+  position: relative;
+  padding: 0px !important;
+  stroke: none;
+}
+#svg-wrapper:hover {
+  width: 56px;
+  transition: width 0.1s;
+  -webkit-transition: width 0.1s;
+  /* Safari */
+}
+
+.toggle-animation {
+  width: 100px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border: solid 1px;
+  font-family: helvetica;
+}
+
+body {
+  background: #F4F4F4;
+}
+
+#radial-tracker {
+  font-family: "Fira Mono", monospace;
+  width: 240px;
+}
+#radial-tracker svg {
+  display: block;
+  margin: auto;
+  padding: 20px;
+  margin: 15px auto;
+}
+#radial-tracker p {
+  text-align: center;
+}
+#radial-tracker p #count {
+  text-decoration: underline;
+  color: #19AAD1;
+}
+#radial-tracker .circle-base {
+  fill: none;
+  stroke: #C5C7C7;
+  stroke-width: 10px;
+}
+#radial-tracker .circle-track {
+  transform-origin: 50% 50%;
+  transform: rotate(-90deg);
+  stroke: #19AAD1;
+  stroke-width: 8px;
+  fill: none;
+  stroke-dasharray: 314px;
+  stroke-dashoffset: 251.327;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s;
+}
+#radial-tracker button {
+  box-sizing: border-box;
+  background: none;
+  border: solid black 1px;
+  padding: 10px;
+  font-family: inherit;
+  width: 38%;
+  margin: 0 5%;
+}
+</style>
+
+  
+  
+  
+</head>
+
+<body translate="no">
+  <div id="radial-tracker" class="center">
+  <p>Using <span id="count">1</span> of 5 widgets.</p>
+  <svg xmlns="http://www.w3.org/2000/svg" height="200px" viewBox="0 0 100 100">
+  <circle class="circle-base" cx="50%" cy="50%" r="50"/>
+  <circle class="circle-track" cx="50%" cy="50%" r="50"/>
+</svg>
+  <button id="inc" onclick="increase()"> Increase</button>
+  <button id="dec" onclick="decrease()"> Decrease</button>
+</div>
+  <script src='https://codepen.io/katzkode/pen/WRjwZR.js'></script>
+      <script id="rendered-js" >
+window.onload = function () {
+  // get circle used to track widget usage  
+  var ct = document.querySelector(".circle-track");
+  // get radius of the circle
+  var r = parseInt(ct.getAttribute("r"));
+  var circ = 2 * Math.PI * r;
+  // current widget utilization;
+  var count = 1;
+  // total available widgets
+  var total = 5;
+
+  // Increase
+  document.getElementById("inc").onclick = function () {
+    if (count < 5) {
+      count++;
+      printCount();
+    }
+    console.log("count", count);
+    ct.style.strokeDashoffset = circ - count / total * circ;
+  };
+
+  // Decrease   
+  document.getElementById("dec").onclick = function () {
+    if (count > 0) {
+      count--;
+      printCount();
+    }
+    ct.style.strokeDashoffset = circ - count / total * circ;
+  };
+
+  // Print Count
+  function printCount() {
+    document.getElementById("count").innerHTML = count;
+  }
+};
+//# sourceURL=pen.js
+    </script>
+
+  
+  <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRefreshCSS-44fe83e49b63affec96918c9af88c0d80b209a862cf87ac46bc933074b8c557d.js"></script>
+</body>
+
+</html>

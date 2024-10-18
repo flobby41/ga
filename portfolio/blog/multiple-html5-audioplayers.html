@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Multiple HTML5 Audio Players</title>
+  <meta name="description" content="Florian Cheheb's portfolio and blog.">
+  <link rel="stylesheet" type="text/css" href="/css/blog.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<style>
+  .audioplayer {
+    width: 480px;
+    height: 60px;
+    margin: 50px auto auto auto;
+    border: solid;
+  }
+  
+  .playbutton {
+    height: 60px;
+    width: 60px;
+    border: none;
+    float: left;
+    outline: none;
+  }
+  
+  .play {
+    background: url('/img/play.png');
+  }
+  
+  .pause {
+    background: url('/img/pause.png');
+  }
+  
+  .play,
+  .pause {
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  .timeline {
+    width: 400px;
+    height: 20px;
+    margin-top: 20px;
+    float: left;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, .3);
+  }
+  
+  .playhead {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    margin-top: 1px;
+    background: rgba(0, 0, 0, 1);
+    cursor: pointer;
+  }
+  </style>
+  
+    
+</head>
+<body>
+<div id="wrapper" class="">
+
+
+
+
+  <header>
+    
+      <div id="logo"><a href="http://garcondargent.com">
+        
+        <div class="face-a"> <a href="" target="_blank" style="cursor: pointer; "><img src="/img/logonoir01_ reduced.jpg" style="width: 100px; height: 95px; border-radius: 100px; position: absolute; top: 50px; left: 90px;"></a>
+        </div>    </a></div>
+      
+        
+    <a href="/blog/blog.html" class="header_link push-right">Blog</a>
+    <a href="/portfolio.html" class="header_link">Portfolio</a>  
+  </header>
+
+
+<section class="center-block padding">
+  <section class="post">
+      <h1>Multiple HTML5 Audio Players</h1>
+    <h6 class="date">Tue, Aug 25, 2022</h6>
+    <p>This is a follow up to my original article, Building a Custom HTML5 Audio Player With Javascript.</p>
+
+<p>A number of people have asked me how to make multiple audio players on one page, so I decided to figure it out. I am posting the code before writing a tutorial so it can be used for your projects.</p>
+
+<p>In brief I created an object called AudioObject for each track and store each object in an array. By storing all the tracks I am able to access each players audio and the components of their interface. I also created a lookup table that maps components like a playbutton or playhead to the array index of the correct AudioObject. The code is well commented, but still needs to be refined and further tested.</p>
+
+<p></p>
+
+<p>Enjoy and as always if you have any questions just let me know!</p>
+<p class="codepen" data-theme-id="5580" data-height="553" data-slug-hash="BaeLaYV" data-pen-title="Multiple HTML5 Audio Player" data-user="flobby41" >
+  <span>See the Pen <a href="https://codepen.io/flobby41/pen/BaeLaYV">
+  Multiple HTML5 Audio Player</a> by flobby41 (<a href="https://codepen.io/flobby41">@flobby41</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+</section>
+</section>
+
+
+<footer>
+        
+  <nav id="footer-nav">
+    <div><a class="link" target="_blank" href="https://www.linkedin.com/in/florian-dev/">LinkedIn</a></div>
+    <div><a class="link" target="_blank" href="https://github.com/flobby41">GitHub</a></div>
+    <div><a class="link" target="_blank" href="https://garcondargent.com/CV.html">Resume</a></div>
+  </nav>
+</footer>
+
+
+</div>
+
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-49880724-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

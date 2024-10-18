@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Binary Search Tree</title>
+  <meta name="description" content="Florian Cheheb's portfolio and blog.">
+  <link rel="stylesheet" type="text/css" href="/css/blog.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="wrapper" class="">
+  <header>
+    
+    <div id="logo">
+      <div class="face-a"> <a href="" target="_blank" style="cursor: pointer; "><img src="/img/logonoir01_ reduced.jpg" style="width: 100px; height: 95px; border-radius: 100px; position: absolute; top: 50px; left: 90px;"></a>
+      </div>
+      
+      
+        </svg>
+    </a></div>
+    <a href="/blog/blog.html" class="header_link push-right">Blog</a>
+    <a href="/portfolio.html" class="header_link">Portfolio</a>
+  </header>
+
+<section class="center-block padding">
+  <section class="post">
+      <h1>Binary Search Tree</h1>
+    <h6 class="date">Sat, Apr 8, 2024</h6>
+    <p>This post will discuss how to connect a BST implementation to d3.js.</p>
+
+<p>I recently implemented a Binary Search Tree in JavaScript. It was a fun exercise and a great opportunity to use ES6 Classes.</p>
+
+<p>Below is my code for the Binary Search Tree class, Node class, and their insertion methods.</p>
+
+<!-- My complete implementation which includes node removal is [here](link). -->
+
+<p></p>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">/* Binary Search Tree Class */</span>
+<span style="color: #007020; font-weight: bold">class</span> BinarySearchTree {
+    <span style="color: #60a0b0; font-style: italic">// constructor</span>
+    constructor() {
+        <span style="color: #007020; font-weight: bold">this</span>.root <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">null</span>;
+    }
+
+    <span style="color: #60a0b0; font-style: italic">// insert</span>
+    insert(value) {
+        <span style="color: #007020; font-weight: bold">if</span> (<span style="color: #007020; font-weight: bold">this</span>.root <span style="color: #666666">==</span> <span style="color: #007020; font-weight: bold">null</span>) {
+            <span style="color: #007020; font-weight: bold">this</span>.root <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> Node(value);
+            <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020; font-weight: bold">true</span>;
+        } <span style="color: #007020; font-weight: bold">else</span> {
+            <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020; font-weight: bold">this</span>.root.insert(<span style="color: #007020; font-weight: bold">new</span> Node(value));
+        }
+    }
+}
+
+<span style="color: #60a0b0; font-style: italic">/* Node Class */</span>
+<span style="color: #007020; font-weight: bold">class</span> Node {
+    constructor(value) {
+        <span style="color: #007020; font-weight: bold">this</span>.value <span style="color: #666666">=</span> value;
+        <span style="color: #007020; font-weight: bold">this</span>.left <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">null</span>;
+        <span style="color: #007020; font-weight: bold">this</span>.right <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">null</span>;
+        <span style="color: #007020; font-weight: bold">this</span>.parent <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">null</span>;
+    }
+    <span style="color: #60a0b0; font-style: italic">// insert</span>
+    insert(node) {
+        <span style="color: #007020; font-weight: bold">if</span> (node.value <span style="color: #666666">==</span> <span style="color: #007020; font-weight: bold">this</span>.value) {
+            <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020; font-weight: bold">false</span>;
+        <span style="color: #60a0b0; font-style: italic">// check left subtree    </span>
+        } <span style="color: #007020; font-weight: bold">else</span> <span style="color: #007020; font-weight: bold">if</span> (node.value <span style="color: #666666">&lt;</span> <span style="color: #007020; font-weight: bold">this</span>.value) {
+            <span style="color: #007020; font-weight: bold">if</span> (<span style="color: #007020; font-weight: bold">this</span>.left <span style="color: #666666">!=</span> <span style="color: #007020; font-weight: bold">null</span>) {
+                <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020; font-weight: bold">this</span>.left.insert(node);
+            } <span style="color: #007020; font-weight: bold">else</span> {
+                <span style="color: #007020; font-weight: bold">this</span>.left <span style="color: #666666">=</span> node;
+                node.parent <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">this</span>;
+                <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020; font-weight: bold">true</span>;
+            }
+        <span style="color: #60a0b0; font-style: italic">// check right subtree</span>
+        } <span style="color: #007020; font-weight: bold">else</span> {
+            <span style="color: #007020; font-weight: bold">if</span> (<span style="color: #007020; font-weight: bold">this</span>.right <span style="color: #666666">!=</span> <span style="color: #007020; font-weight: bold">null</span>) {
+                <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020; font-weight: bold">this</span>.right.insert(node);
+            } <span style="color: #007020; font-weight: bold">else</span> {
+                <span style="color: #007020; font-weight: bold">this</span>.right <span style="color: #666666">=</span> node;
+                node.parent <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">this</span>;
+                <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020; font-weight: bold">true</span>;
+            }
+        }
+    }
+}
+</pre></div>
+
+
+<p>After I finished my implementation I decided to use d3.js to visualize my BST.</p>
+
+<p>To start I adapted <a href="https://bl.ocks.org/d3noob/43a860bc0024792f8803bba8ca0d5ecd">d3noob&rsquo;s block</a> to make a program that visualized a vertical tree from a hardcoded dataset.</p>
+
+
+
+<p class="codepen" data-height="550" data-theme-id="5580" data-default-tab="result" data-slug-hash="XWweLKJ" data-pen-title="Vertical Tree" data-user="flobby41" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/flobby41/pen/XWweLKJ">
+  Vertical Tree</a> by flobby41 (<a href="https://codepen.io/flobby41">@flobby41</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+
+<p>In order to visualize a tree with d3.js, the following occurs:</p>
+
+<ol>
+<li>The SVG is configured.</li>
+<li>A d3 tree layout is initialized</li>
+<li>A call is made to d3.hierarchy</li>
+<li>The nodes are drawn</li>
+<li>The links are drawn</li>
+</ol>
+
+<p>Even though there are a number of steps, only one part of the code needs to be altered to visualize an instance of my BST. This is the the call to <code>d3.hierarchy</code>.</p>
+
+<p><div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>root <span style="color: #666666">=</span> d3.hierarchy(treeData, <span style="color: #007020; font-weight: bold">function</span>(d){ 
+    <span style="color: #007020; font-weight: bold">return</span> d.children; 
+});
+</pre></div>
+</p>
+
+<p>The function <code>d3.hierarchy(data, children)</code> takes in two parameters.</p>
+
+<ol>
+<li>An object that represents the root node of a dataset</li>
+<li>A children accessor function</li>
+</ol>
+
+<p>d3.hierarchy starts with the root and invokes the accessor function for each node. The accessor function must return an array of children or null if there are no children. The hierarchy function gives each node the properties: data, depth, height, parent, children, and value.</p>
+
+<p><code>hierarchy</code> returns the root node.</p>
+
+<p>The first part of the hierarchy call that needs to be changed is the data. Instead of passing the original hardcoded data set, pass a BST instance&rsquo;s root node.</p>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// Assigns parent, children, height, depth</span>
+root <span style="color: #666666">=</span> d3.hierarchy(bstInstance.root, <span style="color: #007020; font-weight: bold">function</span>(d){ 
+    <span style="color: #007020; font-weight: bold">return</span> d.children; 
+});
+</pre></div>
+
+
+<p>This code will run, but the visualization will only have a single node, the root. To solve this issue change the children accessor function so that it puts <code>d.left</code> and <code>d.right</code> into the children array for each node or datum.</p>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>root <span style="color: #666666">=</span> d3.hierarchy(treeData, <span style="color: #007020; font-weight: bold">function</span>(d){
+
+d.children<span style="color: #666666">=</span>[];
+        <span style="color: #007020; font-weight: bold">if</span> (d.left){
+            d.children.push(d.left);
+        }
+        <span style="color: #007020; font-weight: bold">if</span> (d.right){
+            d.children.push(d.right);
+        }
+        <span style="color: #007020; font-weight: bold">return</span> d.children; 
+});
+</pre></div>
+
+
+<p>While this approach correctly assigns children to each node, it does not maintain whether a child is a left or right child. If a node has no siblings it will be displayed directly beneath its parent.</p>
+
+<p><img class="full" src="/img/single-child.png"/></p>
+
+<p>Instead of explicitly changing the coordinates of these nodes, I create a dummy node for each node without a sibling. If an only child is a right child, I insert the dummy node before it. If the only child is a left child, I insert the dummy node after it. This ensures that the children are correctly positioned in relation to their parent.</p>
+
+<p>I used an XOR function to determine if a node had a single child.</p>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">function</span> myXOR(a,b) {
+    <span style="color: #007020; font-weight: bold">return</span> ( a <span style="color: #666666">||</span> b ) <span style="color: #666666">&amp;&amp;</span> <span style="color: #666666">!</span>( a <span style="color: #666666">&amp;&amp;</span> b );
+}
+</pre></div>
+
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>root <span style="color: #666666">=</span> d3.hierarchy(treeData, <span style="color: #007020; font-weight: bold">function</span>(d){
+        d.children<span style="color: #666666">=</span>[];
+        <span style="color: #007020; font-weight: bold">if</span> (d.left){
+            d.children.push(d.left);
+            <span style="color: #007020; font-weight: bold">if</span> (myXOR(d.left, d.right)){
+                d.children.push(<span style="color: #007020; font-weight: bold">new</span> Node(<span style="color: #4070a0">&quot;e&quot;</span>));
+            }
+        }
+        <span style="color: #007020; font-weight: bold">if</span> (d.right){
+            <span style="color: #007020; font-weight: bold">if</span> (myXOR(d.left, d.right)){
+                d.children.push(<span style="color: #007020; font-weight: bold">new</span> Node(<span style="color: #4070a0">&quot;e&quot;</span>));
+            }
+            d.children.push(d.right);
+        }
+        <span style="color: #007020; font-weight: bold">return</span> d.children; 
+    });
+    
+</pre></div>
+
+
+<p><img class="full" src="/img/dummy-node.png"/></p>
+
+<p>This works great, but the dummy nodes need to be hidden. To hide the dummy nodes I add the class &ldquo;hidden&rdquo; to all nodes with a NAN value. Depending on value&rsquo;s type in your BST, you may need to change the <code>isNAN</code> condition.</p>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>nodeEnter.append(<span style="color: #4070a0">&#39;circle&#39;</span>)
+            .attr(<span style="color: #4070a0">&#39;class&#39;</span>, <span style="color: #007020; font-weight: bold">function</span>(d) {
+                <span style="color: #007020; font-weight: bold">if</span> (<span style="color: #007020">isNaN</span>(d.value)) {
+                    <span style="color: #007020; font-weight: bold">return</span> <span style="color: #4070a0">&quot;node hidden&quot;</span>;
+                }
+                <span style="color: #007020; font-weight: bold">return</span> <span style="color: #4070a0">&#39;node&#39;</span>;
+            })
+            .attr(<span style="color: #4070a0">&#39;r&#39;</span>, <span style="color: #40a070">1</span>e<span style="color: #666666">-</span><span style="color: #40a070">6</span>)
+            .style(<span style="color: #4070a0">&quot;fill&quot;</span>, <span style="color: #007020; font-weight: bold">function</span>(d) {
+                <span style="color: #007020; font-weight: bold">return</span> d._children <span style="color: #666666">?</span> <span style="color: #4070a0">&quot;lightsteelblue&quot;</span> <span style="color: #666666">:</span> <span style="color: #4070a0">&quot;#fff&quot;</span>;
+            });
+</pre></div>
+
+
+<p>I do the same for links.</p>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// Enter any new links at the parent&#39;s previous position</span>
+<span style="color: #007020; font-weight: bold">var</span> linkEnter <span style="color: #666666">=</span> link.enter().insert(<span style="color: #4070a0">&#39;path&#39;</span>, <span style="color: #4070a0">&quot;g&quot;</span>)
+    .attr(<span style="color: #4070a0">&quot;class&quot;</span>, <span style="color: #007020; font-weight: bold">function</span>(d) {
+        <span style="color: #007020; font-weight: bold">if</span> (<span style="color: #007020">isNaN</span>(d.value)) {
+            <span style="color: #007020; font-weight: bold">return</span> <span style="color: #4070a0">&quot;link hidden &quot;</span>
+        }
+        <span style="color: #007020; font-weight: bold">return</span> <span style="color: #4070a0">&quot;link&quot;</span>;
+    })            
+</pre></div>
+
+
+<p>Then I added the following to my CSS to hide the dummy nodes and links!</p>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #0e84b5; font-weight: bold">.hidden</span>{<span style="color: #007020">display</span><span style="color: #666666">:</span> <span style="color: #007020">none</span>;}
+</pre></div>
+
+
+<p>The .hidden links and nodes are grayed out in the example below.</p>
+
+<p class="codepen" data-height="550" data-default-tab="result" data-theme-id="5580" data-slug-hash="QWRxmOG" data-pen-title="D3 Vertical Tree" data-user="flobby41" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/flobby41/pen/QWRxmOG">
+  D3 Vertical Tree</a> by flobby41 (<a href="https://codepen.io/flobby41">@flobby41</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="notes">Notes:</h2>
+
+<p>After completing my initial BST implementation, I consulted <a href="http://www.algolist.net/Data_structures/Binary_search_tree/Insertion">Algolist</a> for some ideas on how to clean up my code. I particularly like how they have an insertion method in the BST and Node class. This allows for insertion to be called directly on a node or tree instance. This was cleaner than my method of passing the value to be inserted and a root node to insert().</p>
+  </section>
+</section>
+
+
+
+<footer>
+        
+  <nav id="footer-nav">
+    <div><a class="link" target="_blank" href="https://www.linkedin.com/in/florian-dev/">LinkedIn</a></div>
+    <div><a class="link" target="_blank" href="https://github.com/flobby41">GitHub</a></div>
+    <div><a class="link" target="_blank" href="https://garcondargent.com/CV.html">Resume</a></div>
+  </nav>
+</footer>
+
+</div>
+
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-49880724-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

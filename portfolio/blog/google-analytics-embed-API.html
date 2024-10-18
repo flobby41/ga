@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google Analytics Embed API</title>
+  <meta name="description" content="Florian Cheheb's portfolio and blog.">
+  <link rel="stylesheet" type="text/css" href="/css/blog.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div id="wrapper" class="">
+  <header>
+    
+        
+    <div class="face-a"> <a href="" target="_blank" style="cursor: pointer; "><img src="/img/logonoir01_ reduced.jpg" style="width: 100px; height: 95px; border-radius: 100px; position: absolute; top: 50px; left: 90px;"></a>
+		</div>    
+		
+		<a href="/blog/blog.html" class="header_link push-right">Blog</a>
+    <a href="/portfolio.html" class="header_link">Portfolio</a>  
+
+  </header>
+
+
+<section class="center-block padding">
+  <section class="post">
+      <h1>Google Analytics Embed API</h1>
+    <h6 class="date">Sun, Aug 14, 2023</h6>
+    <p>The Embed API is a JavaScript library that lets you create custom dashboards for Google Analytics that can be hosted on your own site. Why bother creating a dashboard programmatically when you can just create one using Google’s site? Because you can make a better one, control its styling, and accomplish things that cannot be done through Google Analytics alone.</p>
+
+<p>There is a Google tutorial on the Embed API which I used and and enjoyed. I am borrowing from it, but am filling in gaps and adding sections.</p>
+
+<p>To see the types of dashboards that can be built using the API, check out the Embed API <a title="demos" href="https://ga-dev-tools.appspot.com/demos/embed-api" target="_blank">demos</a>.</p>
+
+<p></p>
+
+<hr />
+
+<!--GETTING STARTED-->
+
+<p><h2 class="segment">Creating a Client ID</h2>
+The first thing we are going to do is create a Google Client ID. This ID is needed to perform user authorization.</p>
+
+<p>To get a client ID we need to go to the <a title="Google Developers Console" href="https://console.developers.google.com/" target="_blank">Google Developer&rsquo;s Console</a>.</p>
+
+<p>Login to the Console and press the &ldquo;Create Project&rdquo; button. Give your project a name and a unique ID.</p>
+
+
+
+<p>Now that we have created a project, we can enable the Analytics API.  To do so, click on the <strong>APIs</strong> link, which is nested under <strong>APIs and auth</strong> in the left sidebar.</p>
+
+<p>You should see a list of APIs.  Click on the <strong>off</strong> button to the right of the Analytics API, this will turn it on.</p>
+
+
+
+<p>After enabling the Analytics API, click on <strong>Credentials</strong>, which is under <strong>APIs</strong>.</p>
+
+<p>Click the blue, <strong>Create New Client ID</strong>, button.</p>
+
+
+<p>You see where it says JavaScript origins. This needs to be set to your domain. Do not include any paths.</p>
+
+<p>If you are using localhost, simply set the origins to <a href="http://localhost/">http://localhost/</a>.
+It is important to type your host address exactly. If your site is accessed through https, you must include https in the address.
+Sometimes this can be finicky, so for safe measure include your domain with https, http, and <a href="http://www">http://www</a> at the beginning.</p>
+
+<p>When this is all set, press <strong>Create Client ID</strong>.</p>
+
+<p>We are all done with the Dev Console, but you should copy the Client ID or leave the window open for future reference.</p>
+
+<hr />
+
+<!--THE CODE-->
+
+<p><h2 class="segment">The Code</h2>
+Finally we can start the fun part. Everything up until this point has been setup. It hasn&rsquo;t been thrilling, but it has been important.</p>
+
+<p>As much as I wanted to wait until the end to give the complete code, it makes more sense for me to do it now and then provide a walkthrough.</p>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color: #062873; font-weight: bold">html</span>&gt;
+
+&lt;<span style="color: #062873; font-weight: bold">head</span>&gt;
+	&lt;<span style="color: #062873; font-weight: bold">title</span>&gt;Embed API Demo&lt;/<span style="color: #062873; font-weight: bold">title</span>&gt;
+&lt;/<span style="color: #062873; font-weight: bold">head</span>&gt;
+
+&lt;<span style="color: #062873; font-weight: bold">body</span>&gt;
+	<span style="color: #60a0b0; font-style: italic">&lt;!-- Step 1: Create the containing elements. --&gt;</span>
+	&lt;<span style="color: #062873; font-weight: bold">section</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;auth-button&quot;</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">section</span>&gt;
+	&lt;<span style="color: #062873; font-weight: bold">section</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;view-selector&quot;</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">section</span>&gt;
+	&lt;<span style="color: #062873; font-weight: bold">section</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;timeline&quot;</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">section</span>&gt;
+
+	<span style="color: #60a0b0; font-style: italic">&lt;!-- Step 2: Load the library. --&gt;</span>
+	&lt;<span style="color: #062873; font-weight: bold">script</span>&gt;
+		(<span style="color: #007020; font-weight: bold">function</span> (w, d, s, g, js, fjs) {
+			g <span style="color: #666666">=</span> w.gapi <span style="color: #666666">||</span> (w.gapi <span style="color: #666666">=</span> {});
+			g.analytics <span style="color: #666666">=</span> {
+				q<span style="color: #666666">:</span> [],
+				ready<span style="color: #666666">:</span> <span style="color: #007020; font-weight: bold">function</span> (cb) {
+					<span style="color: #007020; font-weight: bold">this</span>.q.push(cb)
+				}
+			};
+			js <span style="color: #666666">=</span> d.createElement(s);
+			fjs <span style="color: #666666">=</span> d.getElementsByTagName(s)[<span style="color: #40a070">0</span>];
+			js.src <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;https://apis.google.com/js/platform.js&#39;</span>;
+			fjs.parentNode.insertBefore(js, fjs);
+			js.onload <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">function</span> () {
+				g.load(<span style="color: #4070a0">&#39;analytics&#39;</span>)
+			};
+		}(<span style="color: #007020">window</span>, <span style="color: #007020">document</span>, <span style="color: #4070a0">&#39;script&#39;</span>));
+	&lt;/<span style="color: #062873; font-weight: bold">script</span>&gt;
+
+	&lt;<span style="color: #062873; font-weight: bold">script</span>&gt;
+		gapi.analytics.ready(<span style="color: #007020; font-weight: bold">function</span> () {
+
+		<span style="color: #60a0b0; font-style: italic">// Step 3: Authorize the user.</span>
+			<span style="color: #007020; font-weight: bold">var</span> CLIENT_ID <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;Insert Your Client-ID here&#39;</span>;
+
+			gapi.analytics.auth.authorize({
+				container<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;auth-button&#39;</span>,
+				clientid<span style="color: #666666">:</span> CLIENT_ID,
+			});
+
+			<span style="color: #60a0b0; font-style: italic">// Step 4: Create the view selector.</span>
+			<span style="color: #007020; font-weight: bold">var</span> viewSelector <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> gapi.analytics.ViewSelector({
+				container<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;view-selector&#39;</span>
+			});
+			<span style="color: #60a0b0; font-style: italic">// Step 5: Create the timeline chart.</span>
+
+			<span style="color: #007020; font-weight: bold">var</span> timeline <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> gapi.analytics.googleCharts.DataChart({
+				reportType<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;ga&#39;</span>,
+				query<span style="color: #666666">:</span> {
+					<span style="color: #4070a0">&#39;dimensions&#39;</span><span style="color: #666666">:</span> <span style="color: #4070a0">&#39;ga:date&#39;</span>,
+					<span style="color: #4070a0">&#39;metrics&#39;</span><span style="color: #666666">:</span> <span style="color: #4070a0">&#39;ga:sessions&#39;</span>,
+					<span style="color: #4070a0">&#39;start-date&#39;</span><span style="color: #666666">:</span> <span style="color: #4070a0">&#39;30daysAgo&#39;</span>,
+					<span style="color: #4070a0">&#39;end-date&#39;</span><span style="color: #666666">:</span> <span style="color: #4070a0">&#39;yesterday&#39;</span>,
+				},
+				chart<span style="color: #666666">:</span> {
+					type<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;LINE&#39;</span>,
+					container<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;timeline&#39;</span>
+				}
+			});
+
+			<span style="color: #60a0b0; font-style: italic">// Step 6: Hook up the components to work together.</span>
+			gapi.analytics.auth.on(<span style="color: #4070a0">&#39;success&#39;</span>, <span style="color: #007020; font-weight: bold">function</span> (response) {
+				viewSelector.execute();
+			});
+
+			viewSelector.on(<span style="color: #4070a0">&#39;change&#39;</span>, <span style="color: #007020; font-weight: bold">function</span> (ids) {
+				<span style="color: #007020; font-weight: bold">var</span> newIds <span style="color: #666666">=</span> {
+					query<span style="color: #666666">:</span> {
+						ids<span style="color: #666666">:</span> ids
+					}
+				}
+				timeline.set(newIds).execute();
+			});
+		});
+	&lt;/<span style="color: #062873; font-weight: bold">script</span>&gt;
+&lt;/<span style="color: #062873; font-weight: bold">body</span>&gt;
+
+&lt;/<span style="color: #062873; font-weight: bold">html</span>&gt;
+</pre></div>
+
+
+<p><h3>Walkthrough</h3>
+We will begin by creating a new html doc and creating three sections with the following ids.
+<ul>
+    <li>auth</li>
+    <li>view-selector</li>
+    <li>data-chart</li>
+</ul>
+These sections will contain an authentication button, a view picker, and a chart.</p>
+
+<p><div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">section</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;auth-button&quot;</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">section</span>&gt;
+&lt;<span style="color: #062873; font-weight: bold">section</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;view-selector&quot;</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">section</span>&gt;
+&lt;<span style="color: #062873; font-weight: bold">section</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;timeline&quot;</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">section</span>&gt;
+</pre></div>
+</p>
+
+<p>To load the Embed API, include the following script block.</p>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">script</span>&gt;
+	(<span style="color: #007020; font-weight: bold">function</span> (w, d, s, g, js, fjs) {
+		g <span style="color: #666666">=</span> w.gapi <span style="color: #666666">||</span> (w.gapi <span style="color: #666666">=</span> {});
+		g.analytics <span style="color: #666666">=</span> {
+			q<span style="color: #666666">:</span> [],
+			ready<span style="color: #666666">:</span> <span style="color: #007020; font-weight: bold">function</span> (cb) {
+				<span style="color: #007020; font-weight: bold">this</span>.q.push(cb)
+			}
+		};
+		js <span style="color: #666666">=</span> d.createElement(s);
+		fjs <span style="color: #666666">=</span> d.getElementsByTagName(s)[<span style="color: #40a070">0</span>];
+		js.src <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;https://apis.google.com/js/platform.js&#39;</span>;
+		fjs.parentNode.insertBefore(js, fjs);
+		js.onload <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">function</span> () {
+			g.load(<span style="color: #4070a0">&#39;analytics&#39;</span>)
+		};
+	}(<span style="color: #007020">window</span>, <span style="color: #007020">document</span>, <span style="color: #4070a0">&#39;script&#39;</span>));
+&lt;/<span style="color: #062873; font-weight: bold">script</span>&gt;
+</pre></div>
+
+
+<p>The remaining javascript will be wrapped in the gapi.analytics.ready function. This function is triggered when the API is finished loading.</p>
+
+<p>The first thing we will do is authorize the user using OAUTH 2.0. This will allow the us to display information tied to their google analytics account.</p>
+
+<p>Here is the code for to perform authentication. Make sure to set the CLIENT-ID variable to your Client ID.</p>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// Step 3: Authorize the user.</span>
+
+<span style="color: #007020; font-weight: bold">var</span> CLIENT_ID <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;Client-ID Goes Here&#39;</span>;
+
+gapi.analytics.auth.authorize({
+	container<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;auth-button&#39;</span>,
+	clientid<span style="color: #666666">:</span> CLIENT_ID,
+});
+</pre></div>
+
+
+<!--VIEWSELECTOR-->
+
+<p>The following function creates a view selector. The container is set to the id of the viewpicker section.</p>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// Step 4: Create the view selector.</span>
+
+<span style="color: #007020; font-weight: bold">var</span> viewSelector <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> gapi.analytics.ViewSelector({
+	container<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;view-selector&#39;</span>
+});
+</pre></div>
+
+
+<p>Here is the code to create the chart. The query specifies what data you want and the chart defines visual aspects.
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// Step 5: Create the timeline chart.</span>
+
+<span style="color: #007020; font-weight: bold">var</span> timeline <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> gapi.analytics.googleCharts.DataChart({
+	reportType<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;ga&#39;</span>,
+	query<span style="color: #666666">:</span> {
+		<span style="color: #4070a0">&#39;dimensions&#39;</span><span style="color: #666666">:</span> <span style="color: #4070a0">&#39;ga:date&#39;</span>,
+		<span style="color: #4070a0">&#39;metrics&#39;</span><span style="color: #666666">:</span> <span style="color: #4070a0">&#39;ga:sessions&#39;</span>,
+		<span style="color: #4070a0">&#39;start-date&#39;</span><span style="color: #666666">:</span> <span style="color: #4070a0">&#39;30daysAgo&#39;</span>,
+		<span style="color: #4070a0">&#39;end-date&#39;</span><span style="color: #666666">:</span> <span style="color: #4070a0">&#39;yesterday&#39;</span>,
+		},
+	chart<span style="color: #666666">:</span> {
+		type<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;LINE&#39;</span>,
+		container<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;timeline&#39;</span>
+	}
+});
+</pre></div>
+
+The last block of code ties everything together. The viewSelector onChange function updates the chart when a new view is selected.</p>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// Step 6: Hook up the components to work together.</span>
+
+gapi.analytics.auth.on(<span style="color: #4070a0">&#39;success&#39;</span>, <span style="color: #007020; font-weight: bold">function</span> (response) {
+	viewSelector.execute();
+});
+
+viewSelector.on(<span style="color: #4070a0">&#39;change&#39;</span>, <span style="color: #007020; font-weight: bold">function</span> (ids) {
+	<span style="color: #007020; font-weight: bold">var</span> newIds <span style="color: #666666">=</span> {
+		query<span style="color: #666666">:</span> {
+			ids<span style="color: #666666">:</span> ids
+		}
+	}
+	timeline.set(newIds).execute();
+	});
+});
+</pre></div>
+
+
+<!-- I will be updating this tutorial and providing more tutorials related to the Embed API. -->
+
+<p>Here is a link to <a href="https://developers.google.com/analytics/devguides/reporting/embed/v1/devguide" title="Google's tutorial." target="_blank">Google&rsquo;s tutorial</a> if you are interested in exploring more.</p>
+  </section>
+</section>
+
+
+
+
+<footer>
+        
+  <nav id="footer-nav">
+    <div><a class="link" target="_blank" href="https://www.linkedin.com/in/florian-dev/">LinkedIn</a></div>
+    <div><a class="link" target="_blank" href="https://github.com/flobby41">GitHub</a></div>
+    <div><a class="link" target="_blank" href="https://garcondargent.com/CV.html">Resume</a></div>
+  </nav>
+</footer>
+
+
+</div>
+
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-49880724-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

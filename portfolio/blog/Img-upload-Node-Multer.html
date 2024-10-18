@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Upload with Node and Multer</title>
+  <meta name="description" content="Florian Cheheb's portfolio and blog.">
+  <link rel="stylesheet" type="text/css" href="/css/blog.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div id="wrapper" class="">
+  <header>
+   
+    <div class="face-a"> <a href="" target="_blank" style="cursor: pointer; "><img src="/img/logonoir01_ reduced.jpg" style="width: 100px; height: 95px; border-radius: 100px; position: absolute; top: 50px; left: 90px;"></a>
+		</div>    
+		
+		<a href="/blog/blog.html" class="header_link push-right">Blog</a>
+    <a href="/portfolio.html" class="header_link">Portfolio</a>  
+
+
+  </header>
+
+
+<section class="center-block padding">
+  <section class="post">
+      <h1>Image Upload with Node and Multer</h1>
+    <h6 class="date">Sat, Dec 3, 2023</h6>
+    <p>This tutorial provides an end to end walkthrough of uploading images in Node with Multer.</p>
+
+<p>To make things simple I am providing an app-template and complete code.
+Feel free to use the template or an app that you are working on.</p>
+
+<p><a href="https://github." target="_blank">App-Template</a></p>
+
+<p><a href="http://Complete Code" target="_blank">Complete Code</a></p>
+
+<p>I am using <a href="https://github.com/" target="_blank">Multer 1.2.0</a> and Node 6.4.0.</p>
+
+<ol>
+<li>Install Multer, Mime, and Cryto and save to dependencies.</li>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span> <span style="color: #4070a0">`npm install -S multer`</span>
+
+ <span style="color: #4070a0">`npm install -S mime`</span>
+
+ <span style="color: #4070a0">`npm install -S crypto`</span>
+</pre></div>
+
+
+
+<li>Require depencies in route `index.js`</li>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">var</span> express <span style="color: #666666">=</span> require(<span style="color: #4070a0">&#39;express&#39;</span>),
+    router <span style="color: #666666">=</span> express.Router(),
+    mime <span style="color: #666666">=</span> require(<span style="color: #4070a0">&#39;mime&#39;</span>),
+    multer <span style="color: #666666">=</span> require(<span style="color: #4070a0">&#39;multer&#39;</span>);
+</pre></div>
+
+
+<li>Create a form in `index.ejs`</li>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">form</span> <span style="color: #4070a0">action</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;/upload&quot;</span> <span style="color: #4070a0">enctype</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;multipart/form-data&quot;</span> <span style="color: #4070a0">method</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;POST&quot;</span>&gt;
+Select an image to upload:
+&lt;<span style="color: #062873; font-weight: bold">input</span> <span style="color: #4070a0">name</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;image&quot;</span> <span style="color: #4070a0">type</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;file&quot;</span> /&gt;
+&lt;<span style="color: #062873; font-weight: bold">input</span> <span style="color: #4070a0">type</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;submit&quot;</span> <span style="color: #4070a0">value</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;Upload Image&quot;</span> /&gt;
+&lt;/<span style="color: #062873; font-weight: bold">form</span>&gt;
+</pre></div>
+
+
+The form `enctype` must be `multipart/form-data`, which is the encoding used for forms that upload files. The `enctype` specifies how the form-data is encoded when it is submitted to a server.
+
+When submitted, the form will send a POST request to our upload route. We will construct the route in a later step.
+
+<li>Before we can write our upload route, we need to configure Multer's storage. Multer ships with two different storage engines, `DiskStorage` and `MemoryStorage`. I will be using `DiskStorage` which gives you full control over storing files to disk. </li>
+
+Create a folder called `uploads` in `public`.
+
+In `index.js` underneath your require statements, write the following.
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">var</span> storage <span style="color: #666666">=</span> multer.diskStorage({
+  destination<span style="color: #666666">:</span> <span style="color: #007020; font-weight: bold">function</span>(req, file, cb) {
+      cb(<span style="color: #007020; font-weight: bold">null</span>, <span style="color: #4070a0">&#39;public/uploads/&#39;</span>)
+  },
+  filename<span style="color: #666666">:</span> <span style="color: #007020; font-weight: bold">function</span>(req, file, cb) {
+      crypto.pseudoRandomBytes(<span style="color: #40a070">16</span>, <span style="color: #007020; font-weight: bold">function</span>(err, raw) {
+          cb(<span style="color: #007020; font-weight: bold">null</span>, raw.toString(<span style="color: #4070a0">&#39;hex&#39;</span>) <span style="color: #666666">+</span> <span style="color: #007020">Date</span>.now() <span style="color: #666666">+</span> <span style="color: #4070a0">&#39;.&#39;</span> <span style="color: #666666">+</span> mime.extension(file.mimetype));
+      });
+    }
+});
+
+<span style="color: #007020; font-weight: bold">var</span> upload <span style="color: #666666">=</span> multer({
+  storage<span style="color: #666666">:</span> storage
+});
+</pre></div>
+
+
+The two options for `DiskStorage`, `destination` and `filename`, are functions that determine where the file should be stored. As their name's suggest, destination determines the upload location and filename determines the filename.
+
+Multer does not provide a file extension for the upload, so the filename function must return a filename with an extension. Filename uses `Crypto` to generate a random name and uses `Mime` to determine the correct file extension. Generating a random filename prevents collisions if two files are uploaded with the same name. While not required, this is good practice.
+
+`upload` will be called to upload an image.
+
+<li>Write upload route </li>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// POST Upload Image</span>
+router.post(<span style="color: #4070a0">&#39;/upload&#39;</span>, upload.single(<span style="color: #4070a0">&quot;image&quot;</span>), <span style="color: #007020; font-weight: bold">function</span>(req, res) {
+  res.send(<span style="color: #4070a0">&#39;&lt;img src=&quot;/uploads/&#39;</span> <span style="color: #666666">+</span> req.file.filename <span style="color: #666666">+</span> <span style="color: #4070a0">&#39;&quot; /&gt;&#39;</span>);
+});
+</pre></div>
+
+This route first uses Multer to upload the image and then sends a response to the client that includes the image, now hosted on the server.
+
+You should be all set, but if there are any issues please comment.
+</ol>
+
+<p>Sources</p>
+
+<p><a href="https://github.com/expressjs/multer" target="_blank">Multer</a></p>
+
+<p><a href="https://github.com/expressjs/multer/issues/170" target="_blank">Multer Issue: Files are uploading as &lsquo;file without its extension</a></p>
+
+  </section>
+</section>
+
+
+
+<footer>
+        
+  <nav id="footer-nav">
+    <div><a class="link" target="_blank" href="https://www.linkedin.com/in/florian-dev/">LinkedIn</a></div>
+    <div><a class="link" target="_blank" href="https://github.com/flobby41">GitHub</a></div>
+    <div><a class="link" target="_blank" href="https://garcondargent.com/CV.html">Resume</a></div>
+  </nav>
+</footer>
+
+
+</div>
+
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-49880724-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

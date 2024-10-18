@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Building a Custom HTML5 Audio Player With Javascript</title>
+  <meta name="description" content="Create a custom HTML5 audio player with JS, HTML, and CSS.">
+  <link rel="stylesheet" type="text/css" href="/css/blog.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div id="wrapper" class="">
+  <header>
+    
+     
+		<div class="face-a"> <a href="" target="_blank" style="cursor: pointer; "><img src="/img/logonoir01_ reduced.jpg" style="width: 100px; height: 95px; border-radius: 100px; position: absolute; top: 50px; left: 90px;"></a>
+		</div>    
+		
+		<a href="/blog/blog.html" class="header_link push-right">Blog</a>
+    <a href="/portfolio.html" class="header_link">Portfolio</a>  </header>
+
+
+<section class="center-block padding">
+  <section class="post">
+      <h1>Building a Custom HTML5 Audio Player With Javascript</h1>
+    <h6 class="date">Sun, May 4, 2024</h6>
+    <p>This tutorial details how JavaScript, HTML, and CSS can be used to make a custom HTML5 audio interface. It is divided into three sections.</p>
+
+<ol>
+<li>The Play Button</li>
+<li>Track Progress</li>
+<li>Changing Track Position</li>
+</ol>
+
+<p>Here is the code for the audio element that we will be controlling.</p>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">audio</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;music&quot;</span> <span style="color: #4070a0">controls</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;controls&quot;</span>&gt;
+  &lt;<span style="color: #062873; font-weight: bold">source</span> <span style="color: #4070a0">src</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;music/onlyidreamwithyou1.ogg&quot;</span> <span style="color: #4070a0">type</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;audio/ogg&quot;</span> /&gt;
+  &lt;<span style="color: #062873; font-weight: bold">source</span> <span style="color: #4070a0">src</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;music/onlyidreamwithyou1.mp3&quot;</span> <span style="color: #4070a0">type</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;audio/mpeg&quot;</span> /&gt;
+&lt;/<span style="color: #062873; font-weight: bold">audio</span>&gt;
+</pre></div>
+
+
+<p></p>
+
+<h2 id="play-button">PLAY BUTTON</h2>
+
+<p>First we will use HTML to create the play button.We will make two CSS classes, play and pause.</p>
+
+<ol>
+<li>Play – the background property is a play icon</li>
+<li>Pause – the background property is a pause icon</li>
+</ol>
+
+<p>CODE FOR CLASSES AND BUTTON
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">style</span>&gt;
+<span style="color: #0e84b5; font-weight: bold">#pButton</span>{
+	<span style="color: #007020">height</span><span style="color: #666666">:</span><span style="color: #40a070">60px</span>;
+	<span style="color: #007020">width</span><span style="color: #666666">:</span> <span style="color: #40a070">60px</span>;
+	<span style="color: #007020">border</span><span style="color: #666666">:</span> <span style="color: #007020">none</span>;
+	<span style="color: #007020">background</span><span style="color: #666666">-</span><span style="color: #007020">size</span><span style="color: #666666">:</span> <span style="color: #40a070">50%</span> <span style="color: #40a070">50%</span>;
+	<span style="color: #007020">background-position</span><span style="color: #666666">:</span> <span style="color: #007020">center</span>;
+}
+<span style="color: #0e84b5; font-weight: bold">.play</span>{<span style="color: #007020">background</span><span style="color: #666666">:</span> <span style="color: #c65d09">url(&#39;../images/play.png&#39;)</span> <span style="color: #007020">no-repeat</span>;}
+<span style="color: #0e84b5; font-weight: bold">.pause</span>{<span style="color: #007020">background</span><span style="color: #666666">:</span> <span style="color: #c65d09">url(&#39;../images/pause.png&#39;)</span> <span style="color: #007020">no-repeat</span>;}
+&lt;/<span style="color: #062873; font-weight: bold">style</span>&gt;
+
+&lt;<span style="color: #062873; font-weight: bold">button</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;pButton&quot;</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;play&quot;</span> <span style="color: #4070a0">onclick</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;playAudio()&quot;</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">button</span>&gt;
+</pre></div>
+</p>
+
+<p>To make our play button function, we write onclick=&ldquo;playAudio&rdquo; inside the button’s opening tag. This means the playAudio function is called whenever pButton is clicked. The function toggles between the .play and .pause classes and plays and pauses the audio.</p>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// variable to store HTML5 audio element</span>
+<span style="color: #007020; font-weight: bold">var</span> music <span style="color: #666666">=</span> <span style="color: #007020">document</span>.getElementById(<span style="color: #4070a0">&#39;music&#39;</span>);
+
+<span style="color: #007020; font-weight: bold">function</span> playAudio() {
+	<span style="color: #007020; font-weight: bold">if</span> (music.paused) {
+		music.play();
+		pButton.className <span style="color: #666666">=</span> <span style="color: #4070a0">&quot;&quot;</span>;
+		pButton.className <span style="color: #666666">=</span> <span style="color: #4070a0">&quot;pause&quot;</span>;
+	} <span style="color: #007020; font-weight: bold">else</span> {
+		music.pause();
+		pButton.className <span style="color: #666666">=</span> <span style="color: #4070a0">&quot;&quot;</span>;
+		pButton.className <span style="color: #666666">=</span> <span style="color: #4070a0">&quot;play&quot;</span>;
+	}
+}
+</pre></div>
+
+
+<p>The playAudio function checks if the audio is paused. If the audio is paused we call the audio element’s play function. We clear pButton’s classes and add the pause class.
+If the audio is playing we pause it and change pButton’s class to play.</p>
+
+<p>That is all the code you need to make a play button that targets the audio element.</p>
+
+<p>Functions like play and pause are part of the HTMLMediaElement’s interface. If you are interested the API is <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement">here</a>.</p>
+
+<h2 id="track-progress">TRACK PROGRESS</h2>
+
+<p>Before we can start tracking the progress of the audio, we should modify our HTML. Instead of just having a play button, we will create an audio player. We will nest the button, a timeline, and a playhead inside of a div whose id will be audioplayer.</p>
+
+<p>Here is the HTML and CSS. You should also add the float:left property to the play button.</p>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">style</span>&gt;
+<span style="color: #0e84b5; font-weight: bold">#timeline</span>{
+	<span style="color: #007020">width</span><span style="color: #666666">:</span> <span style="color: #40a070">400px</span>;
+	<span style="color: #007020">height</span><span style="color: #666666">:</span> <span style="color: #40a070">20px</span>;
+	<span style="color: #007020">background</span><span style="color: #666666">:</span> <span style="color: #40a070">#4200f7</span>;
+	<span style="color: #007020">margin-top</span><span style="color: #666666">:</span> <span style="color: #40a070">20px</span>;
+	<span style="color: #007020">float</span><span style="color: #666666">:</span> <span style="color: #007020">left</span>;
+	<span style="color: #007020">border</span><span style="color: #666666">-</span>radius<span style="color: #666666">:</span> <span style="color: #40a070">15px</span>;
+}
+
+<span style="color: #0e84b5; font-weight: bold">#playhead</span>{
+	<span style="color: #007020">width</span><span style="color: #666666">:</span> <span style="color: #40a070">18px</span>;
+	<span style="color: #007020">height</span><span style="color: #666666">:</span> <span style="color: #40a070">18px</span>;
+	<span style="color: #007020">border</span><span style="color: #666666">-</span>radius<span style="color: #666666">:</span> <span style="color: #40a070">50%</span>;
+	<span style="color: #007020">margin-top</span><span style="color: #666666">:</span> <span style="color: #40a070">1px</span>;
+	<span style="color: #007020">background</span><span style="color: #666666">:</span> rgba(<span style="color: #40a070">0</span><span style="color: #666666">,</span> <span style="color: #40a070">255</span><span style="color: #666666">,</span> <span style="color: #40a070">196</span><span style="color: #666666">,</span> <span style="color: #40a070">0</span><span style="color: #666666">.</span><span style="color: #40a070">82</span>);
+}
+&lt;/<span style="color: #062873; font-weight: bold">style</span>&gt;
+
+&lt;<span style="color: #062873; font-weight: bold">div</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;audioplayer&quot;</span>&gt;
+	&lt;<span style="color: #062873; font-weight: bold">button</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;pButton&quot;</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;play&quot;</span> <span style="color: #4070a0">onclick</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;play()&quot;</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">button</span>&gt;
+	&lt;<span style="color: #062873; font-weight: bold">div</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;timeline&quot;</span>&gt;
+		&lt;<span style="color: #062873; font-weight: bold">div</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;playhead&quot;</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">div</span>&gt;
+	&lt;/<span style="color: #062873; font-weight: bold">div</span>&gt;
+&lt;/<span style="color: #062873; font-weight: bold">div</span>&gt;
+</pre></div>
+
+
+<p>The audio player should look something like this</p>
+
+<p><img width="400" src="/img/audioplayer.png"></p>
+
+<p>The next step is to write JavaScript that will move the playhead as the track advances. This is accomplished by adding an event listener for timeupdate that triggers a function that moves the playhead the appropriate amount. In order for time update to work we will also need to get the duration of the audio file. The code is also below.</p>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">var</span> duration;
+<span style="color: #007020; font-weight: bold">var</span> music <span style="color: #666666">=</span> <span style="color: #007020">document</span>.getElementById(<span style="color: #4070a0">&#39;playhead&#39;</span>);
+music.addEventListener(<span style="color: #4070a0">&quot;timeupdate&quot;</span>, timeUpdate, <span style="color: #007020; font-weight: bold">false</span>);
+
+<span style="color: #007020; font-weight: bold">function</span> timeUpdate() {
+	<span style="color: #007020; font-weight: bold">var</span> playPercent <span style="color: #666666">=</span> <span style="color: #40a070">100</span> <span style="color: #666666">*</span> (music.currentTime <span style="color: #666666">/</span> duration);
+	playhead.style.marginLeft <span style="color: #666666">=</span> playPercent <span style="color: #666666">+</span> <span style="color: #4070a0">&quot;%&quot;</span>;
+}
+
+<span style="color: #60a0b0; font-style: italic">// Gets audio file duration</span>
+music.addEventListener(<span style="color: #4070a0">&quot;canplaythrough&quot;</span>, <span style="color: #007020; font-weight: bold">function</span> () {
+	duration <span style="color: #666666">=</span> music.duration;
+}, <span style="color: #007020; font-weight: bold">false</span>);
+</pre></div>
+
+
+<h2 id="changing-track-position">CHANGING TRACK POSITION</h2>
+
+<p>There are two ways that we will allow users to change the track position.</p>
+
+<ul>
+<li>Clicking on the timeline</li>
+<li>Dragging the playhead</li>
+</ul>
+
+<p>The first method is accomplished by listening for clicks on the timeline, calculating the click’s position as a percent of the timeline’s width, and updating the playhead and track positions.</p>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">//Makes timeline clickable</span>
+timeline.addEventListener(<span style="color: #4070a0">&quot;click&quot;</span>, <span style="color: #007020; font-weight: bold">function</span> (event) {
+	moveplayhead(event);
+	music.currentTime <span style="color: #666666">=</span> duration <span style="color: #666666">*</span> clickPercent(event);
+}, <span style="color: #007020; font-weight: bold">false</span>);
+
+<span style="color: #60a0b0; font-style: italic">// returns click as decimal (.77) of the total timelineWidth</span>
+<span style="color: #007020; font-weight: bold">function</span> clickPercent(event) {
+    <span style="color: #007020; font-weight: bold">return</span> (event.clientX <span style="color: #666666">-</span> getPosition(timeline)) <span style="color: #666666">/</span> timelineWidth;
+}
+
+<span style="color: #007020; font-weight: bold">function</span> moveplayhead(event) {
+    <span style="color: #007020; font-weight: bold">var</span> newMargLeft <span style="color: #666666">=</span> event.clientX <span style="color: #666666">-</span> getPosition(timeline);
+
+	<span style="color: #007020; font-weight: bold">if</span> (newMargLeft <span style="color: #666666">=</span> <span style="color: #40a070">0</span> amp;amp; newMargLeft <span style="color: #666666">=</span> timelineWidth) {
+		playhead.style.marginLeft <span style="color: #666666">=</span> newMargLeft <span style="color: #666666">+</span> <span style="color: #4070a0">&quot;px&quot;</span>;
+	}
+	<span style="color: #007020; font-weight: bold">if</span> (newMargLeft  <span style="color: #40a070">0</span>) {
+		playhead.style.marginLeft <span style="color: #666666">=</span> <span style="color: #4070a0">&quot;0px&quot;</span>;
+	}
+	<span style="color: #007020; font-weight: bold">if</span> (newMargLeft  timelineWidth) {
+		playhead.style.marginLeft <span style="color: #666666">=</span> timelineWidth <span style="color: #666666">+</span> <span style="color: #4070a0">&quot;px&quot;</span>;
+	}
+}
+
+<span style="color: #60a0b0; font-style: italic">// getPosition</span>
+<span style="color: #60a0b0; font-style: italic">// Returns elements left position relative to top-left of viewport</span>
+<span style="color: #007020; font-weight: bold">function</span> getPosition(el) {
+    <span style="color: #007020; font-weight: bold">return</span> el.getBoundingClientRect().left;
+}
+</pre></div>
+
+
+<p>The code above adds an event listener to the timeline. If the timeline is clicked, this function fires which moves the playhead to the click position and updates the track’s current time.</p>
+
+<p>The moveplayhead function works by changing the playhead’s left margin. The left margin controls the space between the left side of the timeline and the playhead. To calculate the correct left margin value, the x-coordinate of the click event is subtracted by the timeline’s left offset. The left offset is calculated with <code>getPosition</code>.</p>
+
+<p>The conditionals are necessary if the you want to support playhead dragging. If you don’t, just set the playhead’s left margin to newMarginLeft, as any click will be inside the timeline.</p>
+
+<p>The codepen below puts everything together.</p>
+
+
+
+<p class="codepen" data-height="300" data-default-tab="result" data-theme-id="5580" data-slug-hash="YzbrbOG" data-pen-title="HTML5 Audio Player" data-user="flobby41" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/flobby41/pen/YzbrbOG">
+  HTML5 Audio Player</a> by flobby41 (<a href="https://codepen.io/flobby41">@flobby41</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+
+
+<p><a href="https://github.com/flobby41/ga">Complete Code on GitHub</a></p>
+
+<p>If you are interested in using multiple audio players on the same page, you can check out my code here – <a href="https://github.com/flobby41/ga">Multiple HTML5 Audio Players</a>.</p>
+  </section>
+</section>
+
+
+<footer>
+        
+  <nav id="footer-nav">
+    <div><a class="link" target="_blank" href="https://www.linkedin.com/in/florian-dev/">LinkedIn</a></div>
+    <div><a class="link" target="_blank" href="https://github.com/flobby41">GitHub</a></div>
+    <div><a class="link" target="_blank" href="https://garcondargent.com/CV.html">Resume</a></div>
+  </nav>
+</footer>
+
+</div>
+
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-49880724-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

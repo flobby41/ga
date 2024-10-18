@@ -1,0 +1,93 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>CSS Placeholder Text</title>
+
+
+<meta name="description" content="Create a custom HTML5 audio player with JS, HTML, and CSS.">
+<link rel="stylesheet" type="text/css" href="/css/blog.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div id="wrapper" class="">
+<header>
+  
+   
+  <div class="face-a"> <a href="" target="_blank" style="cursor: pointer; "><img src="/img/logonoir01_ reduced.jpg" style="width: 100px; height: 95px; border-radius: 100px; position: absolute; top: 50px; left: 90px;"></a>
+  </div>    
+  
+  <a href="/blog/blog.html" class="header_link push-right">Blog</a>
+  <a href="/portfolio.html" class="header_link">Portfolio</a>  </header>
+
+
+<section class="center-block padding">
+  <section class="post">
+      <h1>CSS Placeholder Text</h1>
+    <h6 class="date">Fri, Mar 10, 2024</h6>
+    <p>How can you find all empty elements on a web page and populate them with placeholder text?</p>
+
+<p>My first thought was to use JavaScript, loop through each element, and populate the empty ones. This approach works, but CSS provides a simple solution.</p>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #666666">*</span><span style="color: #555555; font-weight: bold">:empty</span><span style="color: #666666">:</span><span style="color: #555555; font-weight: bold">:before</span>{ 
+    <span style="color: #007020">content</span><span style="color: #666666">:</span> <span style="color: #4070a0">&quot;Please Add Information&quot;</span>; 
+}
+</pre></div>
+
+
+<p></p>
+
+<p>Using the empty selector and the pseudo element before, placeholder text can be defined using the CSS <code>content</code> property. The <code>:before</code> element is used because the <code>content</code> property only works with pseudo elements.</p>
+
+<h3 id="my-use-case">My Use Case</h3>
+
+<p>I am working on an application that allows researchers to create and manage personas.</p>
+
+<ul>
+<li>To create a new persona a user enters data into a form.</li>
+<li>A page is generated for each persona that displays their associated data.</li>
+</ul>
+
+<p>Because research is an ongoing process, not all of the data fields are filled when a persona is created. Because of this, certain persona pages had a number of blank sections. Instead of hiding blank sections, I used CSS to insert a &ldquo;call to action&rdquo; that prompted researches to update personas with their latest findings.</p>
+
+<p class="codepen" data-height="487" data-theme-id="5580"  data-default-tab="result" data-slug-hash="OJYEZyW" data-pen-title="Untitled" data-user="flobby41" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/flobby41/pen/OJYEZyW">
+  Untitled</a> by flobby41 (<a href="https://codepen.io/flobby41">@flobby41</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+  </section>
+</section>
+
+
+
+
+<footer>
+        
+  <nav id="footer-nav">
+    <div><a class="link" target="_blank" href="https://www.linkedin.com/in/florian-dev/">LinkedIn</a></div>
+    <div><a class="link" target="_blank" href="https://github.com/flobby41">GitHub</a></div>
+    <div><a class="link" target="_blank" href="https://garcondargent.com/CV.html">Resume</a></div>
+  </nav>
+</footer>
+
+
+
+</div>
+
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-49880724-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>
