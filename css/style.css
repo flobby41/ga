@@ -12,29 +12,25 @@ background-position: center center;
 background-attachment: fixed;
 background-repeat: no-repeat;
 background-size: cover;
-min-width: 770px;
-
 }
-
 .bio{
-background-color: black; 
-max-width: 700px;
-height: 600px;
-top: 60px;
-display: flex;
-position: relative;
-left: 100px;
-color: white;
-padding-left: 40px;
-padding-right: 40px;
-padding-top: 30px;
-padding-bottom: 16px;
-font-family: Arial, Helvetica, sans-serif;
-font-size: 20px;
-font-style: normal;
-line-height: 35px;
-text-align: justify;
-margin-top: 1rem  ;
+  background-color: black; 
+  max-width: 700px;
+  height: 60vw;
+  top: 60px;
+ position: relative;
+  left: 100px;
+  color: white;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 30px;
+  padding-bottom: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2vw;
+  font-style: normal;
+  line-height: 35px;
+  text-align: justify;
+  margin-top: 1rem  ;
 }
 .logo-noir-img{
 width: 250px;
@@ -61,10 +57,7 @@ position: relative;
 left: 40px;
 top: 80px;
 }
-
-
-
-.edp-img{
+.edp-img1{
 position: absolute; 
 top: 20px;
 left: 20px;
@@ -83,6 +76,11 @@ padding-right:15px;
 margin-bottom: 30px; 
 color: black;
 
+}
+
+
+.home{
+  display: none;
 }
 
 .un-mec-crazy-div{
@@ -150,6 +148,10 @@ background-color: greenyellow;
 }
 
 
+.edp-div2{
+  display: none;
+}
+
 #main-section img{
 
 position: absolute;
@@ -167,14 +169,8 @@ background-color:black;
 position: relative;
 left: 10px; 
 top: 60px;
-
-
 }
 
-
-/* ---------------------VIDEOS FIN----------------------
-*/
-/* la c est la bar navigation page principale*/
 .nav {
   position: fixed;
   top: 0;
@@ -186,15 +182,12 @@ top: 60px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   z-index: 1;
 }
-
-/* ---------------------------------------just copied from style-merch-navbar */
 .nav-links {
   display: flex;
   align-items: center;
   column-gap: 20px;
   list-style: none;
 }
-
 .nav .navOpenBtn,
 .nav .navCloseBtn {
   display: none;
@@ -206,9 +199,7 @@ width: 3rem;
 height: 3rem;
 border-radius: 50%;
 top: 5px;
-
 }
-
 /* --------------------------------------- */
 
 
@@ -261,13 +252,15 @@ right: 0;
 
 .soupe-pic{
 position: fixed;
-max-width: 578; 
-max-height: 660; 
+max-width: 578px; 
+max-height: 660px; 
 object-fit: cover; 
 right: -20px; 
 top: 100px;
 right: 10px; 
 }
+
+
 .sujet-img  {
 max-width: 600px; 
 max-height: 600px; 
@@ -333,15 +326,20 @@ opacity: 0.6;
 cursor: pointer;
 }
 
-.page-title{
-display: none;
-}
+
+
+
 .spotify-iframe{
 display: flex;
 flex-direction: column;
 gap: 1rem;
 margin-top: 3rem;
 }
+#videos-iframe{
+  display: none
+}
+
+
 
 /* responsive : c'est ca l ecran menu animé noir*/
 @media screen and (max-width: 1160px) {
@@ -359,6 +357,13 @@ display: none;
 
 top: 100px;
 left: 10px; 
+position: fixed;
+width: 100%; 
+height: auto;
+  object-fit: cover; 
+  top: 100px;
+  right: 10px; 
+  
 }
 .deezer{
 position: absolute;
@@ -384,13 +389,7 @@ top: 32.7rem;
 }
 
 
-@media screen and (max-width: 950px) {
 
-
-}
-
-
-/*  : c'est ca le logo Ga*/
 
 @media screen and (max-width: 640px) {
 .nav .navOpenBtn,
@@ -399,21 +398,76 @@ display: block;
 
 }
 
-/* ca c est le logo + videos */
+.bio{
+  background-color: #000000; 
+  width: 90%;
+  height: 1000px;
+  position: relative;
+  top: 40px;
+  left: 15px;
+  color: white;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 30px;
+  padding-bottom: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  line-height: 35px;
+  text-align: justify;
+  margin: 2rem 0 0 0rem;
+}
+
+
+.deezer{
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  left: 16.6rem; 
+  top: 14.5rem;
+  }
+  .fb{
+    width: 35px;
+    height: 35px;
+  position: absolute;
+  left: 13.7rem;
+  top: 25.7rem;
+  }
+  .spotify{
+    width: 35px;
+    height: 35px;
+  position: absolute;
+  left: 8.3rem;
+  top: 12.0rem;
+  }
+  .youtube{
+    width: 35px;
+    height: 35px;
+  position: absolute; 
+  left: 5.5rem;
+  top: 23.3rem;
+  }
+.edp-div2{
+  display: block;
+}
+.video-container img{
+  width: 200px;
+}
+.previews{
+  display: grid;
+  grid-template-columns: 1fr;
+} 
+
+
 .nav {
   padding: 10px 20px;
 }
-.page-title{
+.home{
 display: block;
 }
 .nav img{
   display: none;
   }
-  .nav img{
-    display: none;
-    }
-/*   ca c encore l ecran menu animé noir
-nav-links = lien du navigateur noir*/
 
 .nav .nav-links {
 position: fixed;
@@ -449,23 +503,28 @@ font-size: 20px;
 cursor: pointer;
 z-index: 1;
 } 
-}
 
-@media screen and (min-width: 768px){
-}
-/* ca cest le mot videos */
-div{ 
-font-family: Arial, Helvetica, sans-serif;
-font-size: 14px;
-font-style: italic;
-text-align: center;
+
+#videos{
+  background-image: none;
 
 }
-.page-title{
-position: absolute; 
-left: 100px;
-color: black;
-font-weight: bold;
-background-color: greenyellow;
-font-size: large;
+
+.video-container{
+display: none;}
+
+#videos-iframe{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+iframe{
+margin: 1rem;
+
+}
+iframe:nth-child(1){
+  margin-top: 5rem;
+  
+  }
+
 }
