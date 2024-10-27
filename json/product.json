@@ -1,0 +1,76 @@
+[
+  {
+      "id": 1,
+      "name": "Tote bag",
+      "price": 35,
+      "image": "/img/img-merch/1.webp"
+  },
+  {
+      "id": 2,
+      "name": "Mug",
+      "price": 13,
+      "image": "/img/img-merch/2.webp"
+  },
+  {
+      "id": 3,
+      "name": "Sensation Pop EP",
+      "price": 23,
+      "image": "/img/img-merch/3.webp"
+  }
+  ,
+  {
+      "id": 4,
+      "name": "Black GA T-shirt",
+      "price": 26,
+      "image": "/img/img-merch/4.webp"
+  },
+  {
+      "id": 5,
+      "name": "Key Ring",
+      "price": 8,
+      "image": "/img/img-merch/5.webp"
+  },
+  {
+      "id": 6,
+      "name": "White GA T-shirt",
+      "price": 7,
+      "image": "/img/img-merch/6.webp"
+  }, 
+  {
+    "id": 7,
+    "name": "White GA T-shirt Logo",
+    "price": 7,
+    "image": "/img/img-merch/7.webp"
+}, 
+{
+    "id": 8,
+    "name": "White GA T-shirt Repeat",
+    "price": 7,
+    "image": "/img/img-merch/8.webp"
+},      
+{
+    "id": 9,
+    "name": "Enfants du Paradis EP",
+    "price": 7,
+    "image": "/img/img-merch/9.webp"
+},
+{
+    "id": 10,
+    "name": "Rock'N'Roll EP",
+    "price": 7,
+    "image": "/img/img-merch/10.jpg"
+},
+ {
+    "id": 11,
+    "name": "Urban Machine EP",
+    "price": 7,
+    "image": "/img/img-merch/11.webp"
+}, 
+{
+    "id": 12,
+    "name": "Le Monde Qui a Fondu Ep",
+    "price": 7,
+    "image": "/img/img-merch/12.jpg"
+}
+
+]
