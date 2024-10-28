@@ -306,7 +306,7 @@ top: 522px;
 
 }
 span a{
-color: red; 
+color: white; 
 font-style: normal;
 font-family: Arial, Helvetica, sans-serif;
 font-size: 16px; 
@@ -533,12 +533,12 @@ iframe:nth-child(1){
   
   }
 
-
+  
 .spotify-iframe{
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-top: 3rem;
+  margin-top: 1rem;
   }
 
 }
