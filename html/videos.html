@@ -1,455 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>merch</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>videos</title>
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
     <script src="/JS/script.js" defer></script>
-
     <style>
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body{
-  font-family: Arial, Helvetica, sans-serif;
-  overflow-x: hidden;
-  }
-.nav {
-  position: fixed;
-  top: 0;
-  font-size: 1.5rem;
-  left: 0;
-  width: 100%;
-  padding: 15px 100px;
-  background: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-}
-.nav-links {
-  display: flex;
-  align-items: center;
-  column-gap: 20px;
-  list-style: none;
-}
-.nav .navOpenBtn,
-.nav .navCloseBtn {
-  display: none;
-}
-.nav img{
-position: absolute;
-left: 1rem;
-width: 3rem;
-height: 3rem;
-border-radius: 50%;
-top: 5px;
-}
-a {
-  color: gray;
-  text-decoration: none;
-}
-.home:hover, .videos:hover, .merch:hover, .contact:hover, .music:hover{
-color: rgb(113, 158,206);
-border: 2px solid #000;}
-.listProduct .item{ 
-  text-align: center;
-  }
-.merch{
-  background-color: greenyellow;
-  padding: 6px;
-}
- .iconCart{
-  margin-top: 6rem;
-  display: flex;
-  margin-right: 2rem;
-  min-width: 750px;
-}
-.box{
-  flex: 1;  
-  }
-  header img{
-  width: 40px;
-  }
-  .cadis-bulle{
-    display: flex;
-    position: relative;
-    }
-
-    .home{
-  display: none;
-}
-
-
-  .totalQuantity{
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    font-size:1rem;
-    background-color: #b31010;
-    width: 30px;
-    height: 30px;
-    color: #fff;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;}
-.listProduct{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  min-width: 750px;
-  margin: 4rem 2rem;
-}
-.listProduct .item img{
-  max-width:90%;
-  object-fit: cover;
-}
-.listProduct .item{
-  position: relative;
-}
-  div:nth-child(11) {
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-}
-div:nth-child(11) img{
-margin-bottom: 13rem;
-}
-div:nth-child(12){
-display: flex;
-flex-direction: column;
-justify-content: end;
-}
-div:nth-child(12) img {
-  margin-bottom: 5rem;
-}
-.listProduct .item h2{
-  font-weight: 700;
-  font-size: x-large;
-}
-.listProduct .item .price{
-  font-size: x-large;
-}
-.listProduct .item button{
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  background-color: whitesmoke;
-  color: black;
-  width: 50%;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  transform: translateX(-50%) translateY(100px);
-  opacity: 0;
-}
-.listProduct .item:hover button{
-  transition:  0.5s;
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-.cart{
-  color: #fff;
-  position: fixed;
-  width: 400px;
-  max-width: 80vw;
-  height: 93vh;
-  background-color: #0E0F11;
-margin-top: 3rem;
-  top: 0px;
-  right: -100%;
-  display: grid;
-  grid-template-rows: 50px 1fr 50px;
-  gap: 20px;
-  transition: right 1s;
-}
-.cart .buttons .checkout{
-  background-color: #E8BC0E;
-  color: #000;
-}
-.cart h2{
-  color: #E8BC0E;
-  padding: 20px;
-  height: 30px;
-  margin: 0;
-}
-.cart .listCart .item{
-  display: grid;
-  grid-template-columns: 50px 1fr 70px;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-.cart .listCart img{
-  width: 100%;
-  height: 70px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-.cart .listCart .item .name{
-  font-weight: bold;
-}
-.cart .listCart .item .quantity{
-  display: flex;
-  justify-content: end;
-  align-items: center;
-}
-.cart .listCart .item .quantity span{
-  display: block;
-  width: 50px;
-  text-align: center;
-}
-.cart .listCart{
-  padding: 20px;
-  overflow: auto;
-}
-.cart .listCart::-webkit-scrollbar{
-  width: 0;
-}
-
-.cart .buttons{
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  text-align: center;
-}
-.cart .buttons div{
-  background-color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  cursor: pointer;
-}
-.cart .buttons a{
-  color: #fff;
-  text-decoration: none;
-}
-.checkoutLayout{
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 50px;
-  padding: 20px;
-}
-.checkoutLayout .right{
-  background-color: #5358B3;
-  border-radius: 20px;
-  padding: 40px;
-  color: #fff;
-}
-.checkoutLayout .right .form{
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  border-bottom: 1px solid #7a7fe2;
-  padding-bottom: 20px;
-}
-.checkoutLayout .form h1,
-.checkoutLayout .form .group:nth-child(-n+3){
-  grid-column-start: 1;
-  grid-column-end: 3;
-}
-.checkoutLayout .form input, 
-.checkoutLayout .form select
-{
-  width: 100%;
-  padding: 10px 20px;
-  box-sizing: border-box;
-  border-radius: 20px;
-  margin-top: 10px;
-  border:none;
-  background-color: #6a6fc9;
-  color: #fff;
-}
-.checkoutLayout .right .return .row{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-}
-.checkoutLayout .right .return .row div:nth-child(2){
-  font-weight: bold;
-  font-size: x-large;
-}
-.buttonCheckout{
-  width: 100%;
-  height: 40px;
-  border: none;
-  border-radius: 20px;
-  background-color: #49D8B9;
-  margin-top: 20px;
-  font-weight: bold;
-  color: #fff;
-}
-.returnCart h1{
-  border-top: 1px solid #eee;  
-  padding: 20px 0;
-}
-.returnCart .list .item img{
-  height: 80px;
-}
-.returnCart .list .item{
-  display: grid;
-  grid-template-columns: 80px 1fr  50px 80px;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 30px;
-  padding: 0 10px;
-  box-shadow: 0 10px 20px #5555;
-  border-radius: 20px;
-}
-.returnCart .list .item .name,
-.returnCart .list .item .returnPrice{
-  font-size: large;
-font-weight: bold;
-}
-button:hover{
-opacity: 0.8;
-}
-@media screen and (max-width: 640px) { 
-
-  .home{
-  display: block;
-}
-
-  .nav .navOpenBtn,
-  .nav .navCloseBtn {
-    display: block;
-  }
-
-  .listProduct{
-  display: block;
-  margin: 0;
-}
-.listProduct .item {
-  margin: 0;
-}
-
-  .listProduct .item, .listProduct h2{
-margin: 0rem 0;}
-
-.listProduct .price{
-  margin-bottom: 2rem;
-}
-
-
-div:nth-child(11) img{
-  margin-bottom: 0;
-}
-div:nth-child(12) img{
-  margin-bottom: 0;
-}
-
-  .nav {
-    padding: 10px 20px;
-  }
-  .nav img{
-    display: none;
-    }
-  .nav .nav-links {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    height: 100%;
-    max-width: 280px;
-    width: 50%;
-    padding-top: 100px;
-    row-gap: 30px;
-    flex-direction: column;
-    background-color: #11101d;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s ease;
-  }
-  .nav.openNav .nav-links {
-    left: 0;
-  }
-  .nav .navOpenBtn {
-    color: black;
-    font-size: 32px;
-    cursor: pointer;
-  }
-   .nav .navCloseBtn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: #fff;
-    font-size: 20px;
-    cursor: pointer;
-  } 
-}
-      button:hover{
-        opacity: 0.8;
-      }
-    .merch:link{
+    .videos:link{
       background-color: greenyellow;
     font-size: 1.6rem;
-    font-weight: bold;
-    }
+    font-weight: bold;}
     </style>
-</head>
-<body>
-  <nav class="nav" >
-    <a href="/index.html"><img src="/img/logo/logonoir01_ reduced.jpg"></a>
-     <i class="uil uil-bars navOpenBtn" id="searchIcon"; > 
-     </i>
-     <ul class="nav-links">
-      <i class="uil uil-times navCloseBtn"></i>
-      <li><a class="home" href="/index.html">home</a></li>
-      <li><a class="videos" href="/html/videos.html">videos</a></li>
-      <li><a class="music" href="/html/musique.html">music</a></li>
-      <li><a class="merch" href="/html/merch.html">merch</a></li>
-      <li><a class="contact" href="/html/contact.html">follow me</a></li>
-    </ul>
-  </nav>
-        <header>
-            <div class="iconCart" > 
-              <div class="box"></div>
-              <div class="cadis-bulle">
-                <img src="/img/img-merch/icon.png">
-                <div class="totalQuantity">0</div>
-              </div>
-            </div>
-        </header>
-          <div class="listProduct">
-            <div class="item">
-              <img src="images/1.webp" alt="">
-              <h2>CoPilot / Black / Automatic</h2>
-              <div class="price">$550</div>
-              <button>Add To Cart</button>            
-            </div>
+  </head>
+  <body id="videos">
+    <nav class="nav" >
+      <a href="/index.html"><img src="/img/logo/logonoir01_ reduced.jpg"></a>
+       <i class="uil uil-bars navOpenBtn" id="searchIcon"; > 
+       </i>
+       <ul class="nav-links">
+        <i class="uil uil-times navCloseBtn"></i>
+        <li><a class="home" href="/index.html">home</a></li>
+        <li><a class="videos" href="/html/videos.html">videos</a></li>
+        <li><a class="music" href="/html/musique.html">music</a></li>
+        <li><a class="merch" href="/html/merch.html">merch</a></li>
+        <li><a class="contact" href="/html/contact.html">follow me</a></li>
+      </ul>
+    </nav>
+    <main>
+      <img class="sujet-img" src="/img/sujet/Sujet-little-35.webp">
+      <div class="video-container">
+        <div class="edp-div1"> 
+          <a href="https://www.youtube.com/watch?v=HKvcwZvoDJA&ab_channel=Gar%C3%A7ond%27Argent" target="_blank">
+          <img class="edp-img1" src="/img/prev/edp.webp" alt="" > </a>
+        </div>
+        <div class="previews">
+          <div class="un-mec-crazy-div"> 
+            <a href="https://www.youtube.com/watch?v=ucYa5beUfK8&ab_channel=Gar%C3%A7ond%27Argent" target="_blank">
+            <img class="un-mec-crazy-img" src="/img/prev/un mec crazy.webp"> </a>
+            <div class="vid-prev-title-crazy"> Garçon d'Argent - Un Mec Crazy</div>
           </div>
-    <div class="cart">
-        <h2>
-            CART
-        </h2>
-        <div class="listCart">
-            <div class="item">
-              <img src="images/1.webp">
-                <div class="content">
-                  <div class="name">CoPilot / Black / Automatic</div>
-                    <div class="price">$550 / 1 product</div>
-            
-                </div>
-                <div class="quantity">
-                    <button>-</button>
-                    <span class="value">3</span>
-                    <button>+</button>
-                </div>
-            </div>
+          <div class="sensaspop-div">  
+            <a href="https://www.youtube.com/watch?v=O5oKK6bbbT4&ab_channel=Gar%C3%A7ond%27Argent" target="_blank ">
+              <img class="sensaspop-img" src="/img/prev/sensaspop.webp"></a>
+              <div class="sensaspop-title"> Garçon d'Argent - Sensation Pop</div>
+          </div>
+          <div class="div-rnroll"> 
+            <a href="https  ://www.youtube.com/watch?v=vMs9r0ZM96k&ab_channel=Gar%C3%A7ond%27Argent" target="_blank ">
+              <img class="img-rnroll" src="/img/prev/rocknroll-prev.jpeg"></a>
+              <div class="prev-title-rnroll" > Garçon d'Argent - Rock'n'Roll</div>
+          </div> 
         </div>
-        <div class="buttons">
-            <div class="close">
-                CLOSE
-            </div>
-            <div class="checkout">
-                <a href="/html/checkout.html">CHECKOUT</a>
-            </div>
-        </div>
-    </div>
-    <script src="/JS/app.js"></script>
-</body>
+      </div>
+
+
+  <div id="videos-iframe">
+    <iframe width="100%"  src="https://www.youtube.com/embed/HKvcwZvoDJA" id="HKvcwZvoDJA">
+    </iframe>
+    <iframe width="100%"  src="https://www.youtube.com/embed/O5oKK6bbbT4" id="O5oKK6bbbT4">
+    </iframe>
+    <iframe width="100%"  src="https://www.youtube.com/embed/ucYa5beUfK8" id="ucYa5beUfK8">
+    </iframe>
+    <iframe width="100%"  src="https://www.youtube.com/embed/vMs9r0ZM96k" id="vMs9r0ZM96k">
+    </iframe>
+    <iframe width="100%"  src="https://www.youtube.com/embed/hylQzj2o9fY" id="hylQzj2o9fY">
+    </iframe>
+    <iframe width="100%"  src="https://www.youtube.com/embed/uj6vyelbadQ" id="uj6vyelbadQ">
+    </iframe>
+    <iframe width="100%"  src="https://www.youtube.com/embed/vMs9r0ZM96k" id="vMs9r0ZM96k">
+    </iframe>
+    <iframe width="100%"  src="https://www.youtube.com/embed/pjXuS-XVhXM" id="pjXuS-XVhXM">
+    </iframe>
+    
+  </div>
+  </main>
+  </body>
 </html>
