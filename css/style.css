@@ -12,12 +12,12 @@ background-position: center center;
 background-attachment: fixed;
 background-repeat: no-repeat;
 background-size: cover;
-zoom: 90%;
 }
 .bio{
   background-color: black; 
   max-width: 700px;
-  height: 60vw;
+  height: 50vw;
+  min-height: 500px;
   top: 60px;
  position: relative;
   left: 100px;
@@ -29,7 +29,7 @@ zoom: 90%;
   font-family: Arial, Helvetica, sans-serif;
   letter-spacing: -0.03em;
   text-rendering: geometricPrecision;
-    font-size: 2vw;
+    font-size: 1.5vw;
   font-style: normal;
   line-height: 45px;
   text-align:left;
@@ -80,6 +80,7 @@ margin-bottom: 30px;
 color: black;
 
 }
+
 
 
 .home{
@@ -184,6 +185,7 @@ top: 60px;
   background: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   z-index: 1;
+  
 }
 .nav-links {
   display: flex;
@@ -409,7 +411,7 @@ display: block;
 .bio{
   background-color: #000000; 
   width: 90%;
-  height: 1000px;
+  height: 900px;
   position: relative;
   top: 40px;
   left: 15px;
@@ -546,4 +548,8 @@ iframe:nth-child(1){
   margin-top: 5rem;
   }
 
+
+
+
 }
+
